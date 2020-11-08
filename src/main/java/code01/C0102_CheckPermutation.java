@@ -84,7 +84,8 @@ public class C0102_CheckPermutation {
     }
 
     /**
-     * B     * @param s1
+     * bit1
+     * @param s1
      * @param s2
      * @return
      */
