@@ -43,7 +43,7 @@ class Solution002:
 
 
 if __name__ == "__main__":
-    nums = [2, 7, 11, 15];
+    nums = [2, 7, 11, 15]
     target = 9
     print(Solution001().twoSum(nums, target))
     print(Solution002().twoSum(nums, target))
