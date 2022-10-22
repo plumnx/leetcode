@@ -40,25 +40,8 @@ class ListNode:
 
 
 class Solution:
-    def addTwoNumbers1(self, l1: ListNode, l2: ListNode) -> ListNode:
-        dummy = ListNode(0)
-        cur = dummy
-        carry = 0
-        while l1 or l2:
-            num1 = l1.val if l1 else 0
-            num2 = l2.val if l2 else 0
-            sum = num1 + num2 + carry
 
-            carry = sum // 10
-            cur.next = ListNode(sum % 10)
-            cur = cur.next
-            l1 = l1.next if l1 else None
-            l2 = l2.next if l2 else None
-        if carry:
-            cur.next = ListNode(carry)
-        return dummy.next
-
-    def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         result = ListNode(0);
         curr = result;
 
@@ -107,4 +90,4 @@ if __name__ == "__main__":
     cur = cur.next
     cur.next = ListNode(9)
 
-    print(Solution().addTwoNumbers2(l1, l2))
+    print(Solution().addTwoNumbers(l1, l2))
