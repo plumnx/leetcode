@@ -28,19 +28,19 @@
 # 题目数据保证列表表示的数字不含前导零
 
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-    def gatherAttrs(self):
+    def getAttrs(self):
         return ", ".join("{}: {}".format(k, getattr(self, k)) for k in self.__dict__.keys())
 
     def __str__(self):
-        return self.__class__.__name__ + " {" + "{}".format(self.gatherAttrs()) + "}"
+        return self.__class__.__name__ + " {" + "{}".format(self.getAttrs()) + "}"
 
 
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers1(self, l1: ListNode, l2: ListNode) -> ListNode:
         dummy = ListNode(0)
         cur = dummy
         carry = 0
@@ -58,9 +58,53 @@ class Solution:
             cur.next = ListNode(carry)
         return dummy.next
 
+    def addTwoNumbers2(self, l1: ListNode, l2: ListNode) -> ListNode:
+        result = ListNode(0);
+        curr = result;
+
+        while l1 or l2:
+            val1 = l1.val if l1 else 0
+            val2 = l2.val if l2 else 0
+
+            sum = val1 + val2 + curr.val
+            val3 = sum // 10
+            val4 = sum % 10
+
+            curr.val = val4
+
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+
+            if (l1 or l2) or val3 > 0:
+                curr.next = ListNode(val3)
+                curr = curr.next if curr else 0
+
+        return result
+
 
 if __name__ == "__main__":
-    l1 = ListNode(2);l1.next = ListNode(4); l1.next.next = ListNode(3)
-    l2 = ListNode(5);l2.next = ListNode(6); l2.next.next = ListNode(4)
+    # case 1
+    # cur = l1 = ListNode(2)
+    # cur.next = ListNode(4)
+    # cur = cur.next
+    # cur.next = ListNode(3)
+    #
+    # cur = l2 = ListNode(5)
+    # cur.next = ListNode(6)
+    # cur = cur.next
+    # cur.next = ListNode(4)
 
-    print(Solution().addTwoNumbers(l1, l2))
+    # case 2
+    cur = l1 = ListNode(9)
+    cur.next = ListNode(9)
+    cur = cur.next
+    cur.next = ListNode(9)
+
+    cur = l2 = ListNode(9)
+    cur.next = ListNode(9)
+    cur = cur.next
+    cur.next = ListNode(9)
+    cur = cur.next
+    cur.next = ListNode(9)
+
+    print(Solution().addTwoNumbers2(l1, l2))
